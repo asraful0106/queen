@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width">
+    <title>My Love For You</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="icon" href="image/af_logo.png">
+</head>
+
+<body>
+    <header>
+        <div class="content">
+            <div class="top-slider">
+                <marquee behavior="scroll">Don't ever fear or feel alone I was, I am and I will be with you for forever
+                    my love. Love You amr Shezadi -----(From your Love)-------</marquee>
+            </div>
+            <div class="main-contex">
+                <div class="text1">
+                    <h2>YOUR GIFT <span>IS</span></h2>
+                    <h1>COMMING SOON</h1>
+                    <div class="countdown">
+                        <div class="container-day">
+                            <h1 class="day">00</h1>
+                            <p>Day</p>
+                        </div>
+                        <div class="container-hour">
+                            <h1 class="hour">00</h1>
+                            <p>Hour</p>
+                        </div>
+                        <div class="container-minute">
+                            <h1 class="minute">00</h1>
+                            <p>Minute</p>
+                        </div>
+                        <div class="container-second">
+                            <h1 class="second">00</h1>
+                            <p>Sec</p>
+                        </div>
+                    </div>
+                    <h4>LEFT TO GO</h4>
+                </div>
+                <div class="love">
+                    <h3>Love you pgli</h3>
+                    <img id="icon" src="image/play.png" alt="">
+                </div>
+            </div>
+        </div>
+    </header>
+    <script src="js/main.js"></script>
+    <audio id="lovesong" src="media/love.mp3"></audio>
+
+    <!-- Countdown and Audio Script -->
+    <script>
+        var lovesong = document.getElementById("lovesong");
+        var icon = document.getElementById("icon");
+        lovesong.volume = 0.2;
+        icon.onclick = function () {
+            if (lovesong.paused) {
+                lovesong.play();
+                icon.src = "image/pause.png"
+            } else {
+                lovesong.pause();
+                icon.src = "image/play.png"
+            }
+        }
+
+        // Countdown function
+        const countdown = () => {
+            const countDate = new Date("2024-10-01T00:30:00").getTime(); // Target date in ISO format
+            const now = new Date().getTime(); // Current time
+            const gap = countDate - now; // Time difference
+
+            // Time units
+            const second = 1000;
+            const minute = second * 60;
+            const hour = minute * 60;
+            const day = hour * 24;
+
+            if (gap > 0) {
+                // Calculate remaining time
+                const textDay = Math.floor(gap / day);
+                const textHour = Math.floor((gap % day) / hour);
+                const textMinute = Math.floor((gap % hour) / minute);
+                const textSecond = Math.floor((gap % minute) / second);
+
+                // Update countdown elements
+                document.querySelector(".day").innerText = textDay;
+                document.querySelector(".hour").innerText = textHour;
+                document.querySelector(".minute").innerText = textMinute;
+                document.querySelector(".second").innerText = textSecond;
+            } else {
+                // Countdown finished, show birthday message and play song
+                document.querySelector(".countdown").style.display = "none";
+                document.querySelector(".main-contex").innerHTML = `<pre>Happy Birthday Naima....
+ Even though we may be apart,
+my heart still holds a special place for you.
+May this year bring you all the happiness and
+love you deserve.
+Maybe this is last atempt from my side!!!!</pre>`;
+
+                if (lovesong.paused) {
+                    lovesong.play();
+                    icon.src = "image/pause.png";
+                }
+            }
+        };
+
+        // Call countdown every second
+        setInterval(countdown, 1000);
+
+        // Call countdown once to set initial values
+        countdown();
+    </script>
+</body>
+
+</html>
